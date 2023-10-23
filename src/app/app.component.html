@@ -170,5 +170,140 @@
         </li>
       </ul>
     </div>
+    <div class="py-10">
+      <h3 class="text-md font-bold leading-6 pb-5">Create zkOracle Feed</h3>
+      <div class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl p-5">
+        <div>
+          <h5 class="text-md font-semibold leading-6">
+            Select Off-chain Worker
+          </h5>
+          <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <label
+              class="relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none"
+              ><input
+                type="radio"
+                name="network-type"
+                value="Network Selection"
+                class="sr-only" /><span class="flex flex-1"
+                ><span
+                  ><span class="block text-sm font-semibold text-gray-900"
+                    >Local</span
+                  ><span
+                    class="mt-3 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-indigo-700/10"
+                  >
+                    Testing</span
+                  ></span
+                ></span
+              >
+
+              <svg
+                class="h-5 w-5 text-indigo-600"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+
+              <span
+                aria-hidden="true"
+                class="pointer-events-none absolute -inset-px rounded-lg border-2 border-indigo-600"
+              ></span></label
+            ><label
+              class="relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none"
+              ><input
+                type="radio"
+                name="network-type"
+                value="Network Selection"
+                class="sr-only" /><span class="flex flex-1"
+                ><span
+                  ><span class="block text-sm font-semibold text-gray-900"
+                    >Acurast</span
+                  ><span
+                    class="mt-3 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium ring-1 ring-inset ring-indigo-700/10"
+                  >
+                    Testing</span
+                  ></span
+                ></span
+              >
+
+              <svg
+                class="h-5 w-5 text-indigo-600"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+
+              <span
+                aria-hidden="true"
+                class="pointer-events-none absolute -inset-px rounded-lg"
+              ></span
+            ></label>
+          </div>
+          <h5 class="text-md font-semibold leading-6 pt-8 pb-3">
+            Specify Parameters
+          </h5>
+          <div class="grid grid-cols-6 gap-6 pb-3">
+            <div class="col-span-3">
+              <label class="block text-sm font-medium leading-6 text-gray-900"
+                >API</label
+              >
+              <div class="w-full inline-flex">
+                <div class="w-full relative mt-2 rounded-md shadow-sm">
+                  <input
+                    placeholder="https://min-api.cryptocompare.com/data/pricemultifull?fsyms=MINA&tsyms=USD"
+                    class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+              <!--
+                          <div *ngIf="hasError('required')" class="text-red-600 text-sm mt-1">{{ name }} is required.</div>
+                          -->
+              <span class="pt-3 block text-sm text-gray-500"
+                >The API to fetch the price data.</span
+              >
+            </div>
+          </div>
+          <div class="grid grid-cols-6 gap-6">
+            <div class="col-span-2">
+              <label class="block text-sm font-medium leading-6 text-gray-900"
+                >Interval</label
+              >
+              <div class="w-full inline-flex">
+                <div class="w-full relative mt-2 rounded-md shadow-sm">
+                  <input
+                    placeholder="5"
+                    class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+              <!--
+                          <div *ngIf="hasError('required')" class="text-red-600 text-sm mt-1">{{ name }} is required.</div>
+                          -->
+              <span class="pt-3 block text-sm text-gray-500"
+                >The interval for updating in minutes.</span
+              >
+            </div>
+          </div>
+          <div class="pt-5">
+            <button
+              class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-gray-400"
+            >
+              Create zkOracle Feed
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
