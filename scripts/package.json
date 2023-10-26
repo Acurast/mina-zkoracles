@@ -1,0 +1,13 @@
+{
+  "name": "acurast-mina-zkoracle-scripts",
+  "version": "0.0.0",
+  "scripts": {
+    "price-watcher": "npx ts-node --esm price-watcher.ts"
+  },
+  "private": true,
+  "devDependencies": {
+    "node-fetch": "^3.3.2",
+    "ts-node": "^10.9.1"
+  },
+  "type": "module"
+}
