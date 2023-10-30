@@ -18,7 +18,7 @@ The «zkOracles Acurast Frontend» in its current PoC stage has the following co
 
 This translates in the following flow, where the Frontend itself uses a "local" off-chain worker that requests the data from a third party API and signs and submits it on-chain to the zkOracle.
 
-![image](/frontend/src/assets/docs/zkOracles-Frontend.svg)
+![image](/docs/assets/zkOracles-Frontend.svg)
 
 ### Finalized Architecture With Acurast:
 
@@ -28,7 +28,7 @@ This translates in the following flow, where the Frontend itself uses a "local" 
 
 The flow in a finalized architecture where Acurast Processors are used for the off-chain task to confidentialy and trustlessly execute requests within their Trusted Execution Evnironment, sign the proof with a private key stored within the TEE and submits it then directly on-chain.
 
-![image](/frontend/src/assets/docs/zkOracles-Acurast.svg)
+![image](/docs/assets/zkOracles-Acurast.svg)
 
 The created and “notarized” proof can be directly injected to the Mina protocol, by the Acurast Processor in a signed transaction. For Transport Layer Security (TLS) secured endpoints it is possible for the trusted execution environment to observe the handshake and certificate pin the received response to a specific server (e.g., Binance), this allows the developer to proof that the data was really observed at the specified source and has not been tampered with.
 
@@ -36,7 +36,7 @@ The created and “notarized” proof can be directly injected to the Mina proto
 
 An extension of this flow can be to utilize a direct connection to the Acurast Processor through a websocket communication channel and sent back to the user that requested this notarization.
 
-![image](/frontend/src/assets/docs/zkOracles-Acurast.svg)
+![image](/docs/assets/zkOracles-Acurast.svg)
 
 Giving zkApp developers the ability to leverage sub-second communication times for real time observation, this can enable e.g., DeFi application to lower the risk and automation of their protocol better. And off-loading the transaction fees to the user that otherwise have to come from Acurast Processors.
 
