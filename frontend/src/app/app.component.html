@@ -310,6 +310,27 @@
                 >
               </div>
             </div>
+            <div class="grid grid-cols-6 gap-6 pb-3">
+              <div class="col-span-3">
+                <label class="block text-sm font-medium leading-6 text-gray-900"
+                  >Trusted Oracle Source</label
+                >
+                <div class="w-full inline-flex">
+                  <div class="w-full relative mt-2 rounded-md shadow-sm">
+                    <input
+                      placeholder="Public Key"
+                      class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+                <!--
+                              <div *ngIf="hasError('required')" class="text-red-600 text-sm mt-1">{{ name }} is required.</div>
+                              -->
+                <span class="pt-3 block text-sm text-gray-500"
+                  >The public key of the trusted data provider.</span
+                >
+              </div>
+            </div>
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-2">
                 <label class="block text-sm font-medium leading-6 text-gray-900"
