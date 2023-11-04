@@ -19,12 +19,16 @@ export class AcurastPriceOracle extends SmartContract {
   @state(PublicKey) oraclePublicKey = State<PublicKey>();
   // @state(CircuitString) symbol = State<CircuitString>();
   @state(Field) counter = State<Field>();
-  @state(Field) priceData = State<Field>();
+  @state(Field) priceDataBTC = State<Field>();
+  @state(Field) priceDataETH = State<Field>();
+  @state(Field) priceDataMINA = State<Field>();
 
   // Define contract events
   events = {
     newCounter: Field,
-    newPriceData: Field,
+    newPriceDataBTC: Field,
+    newPriceDataETH: Field,
+    newPriceDataMINA: Field,
   };
 
   init() {
@@ -33,12 +37,20 @@ export class AcurastPriceOracle extends SmartContract {
     this.oraclePublicKey.set(PublicKey.fromBase58(ORACLE_PUBLIC_KEY));
     // this.symbol.set(CircuitString.fromString(ORACLE_SYMBOL));
     this.counter.set(Field(0));
-    this.priceData.set(Field(0));
+    this.priceDataBTC.set(Field(0));
+    this.priceDataETH.set(Field(0));
+    this.priceDataMINA.set(Field(0));
     // Specify that caller should include signature with tx instead of proof
     this.requireSignature();
   }
 
-  @method update(nextCounter: Field, priceData: Field, signature: Signature) {
+  @method update(
+    nextCounter: Field,
+    priceDataBTC: Field,
+    priceDataETH: Field,
+    priceDataMINA: Field,
+    signature: Signature
+  ) {
     // Get the oracle public key from the contract state
     const oraclePublicKey = this.oraclePublicKey.get();
     this.oraclePublicKey.assertEquals(oraclePublicKey);
@@ -57,15 +69,21 @@ export class AcurastPriceOracle extends SmartContract {
     // Check if the signature is valid for the provided data
     const validSignature = signature.verify(oraclePublicKey, [
       nextCounter,
-      priceData,
+      priceDataBTC,
+      priceDataETH,
+      priceDataMINA,
     ]);
     validSignature.assertTrue();
 
     // Store priceData on chain
-    this.priceData.set(priceData);
+    this.priceDataBTC.set(priceDataBTC);
+    this.priceDataETH.set(priceDataETH);
+    this.priceDataMINA.set(priceDataMINA);
 
     // Emit price Data event
     this.emitEvent('newCounter', internalNextCounter);
-    this.emitEvent('newPriceData', priceData);
+    this.emitEvent('newPriceDataBTC', priceDataBTC);
+    this.emitEvent('newPriceDataETH', priceDataETH);
+    this.emitEvent('newPriceDataMINA', priceDataMINA);
   }
 }
