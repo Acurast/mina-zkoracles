@@ -11,7 +11,7 @@ import {
 
 // The public key of our trusted data provider
 const ORACLE_PUBLIC_KEY =
-  'B62qiuqHEdkoUn6URQjcTH6BbqGMhWYiCpHs45Vh1RKMBH1LiFJC5iP';
+  'B62qpp64LMwifdSmJSGRwksxrF5SEpYTQMX1kekS7GYdM9Y8TspXCvC';
 // const ORACLE_SYMBOL = 'BTC';
 
 export class AcurastPriceOracle extends SmartContract {
@@ -61,7 +61,7 @@ export class AcurastPriceOracle extends SmartContract {
 
     // Increase internal counter by one and assert if it's the same that the user passed
     const internalNextCounter = internalCounter.add(1);
-    internalNextCounter.assertEquals(nextCounter);
+    internalNextCounter.assertEquals(nextCounter, 'Next counter is not valid');
 
     // Update counter
     this.counter.set(internalNextCounter);
@@ -73,7 +73,7 @@ export class AcurastPriceOracle extends SmartContract {
       priceDataETH,
       priceDataMINA,
     ]);
-    validSignature.assertTrue();
+    validSignature.assertTrue('Signature is not valid');
 
     // Store priceData on chain
     this.priceDataBTC.set(priceDataBTC);

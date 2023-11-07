@@ -41,6 +41,19 @@ import { JSONPath } from 'jsonpath-plus';
 
   const deployerPrivateKey = PrivateKey.fromBase58(deployerPrivateKeyBase58);
 
+  // DEPLOYER KEY
+
+  const feePayerPrivateKeyFileContents = fs.readFileSync(
+    'keys/deployer.json',
+    'utf8'
+  );
+
+  let feePayerKey = JSON.parse(feePayerPrivateKeyFileContents);
+
+  const feePayerPrivateKeyBase58 = feePayerKey.privateKey;
+
+  const feePayerPrivateKey = PrivateKey.fromBase58(feePayerPrivateKeyBase58);
+
   // ----------------------------------------------------
 
   let account = await loopUntilAccountExists({
@@ -81,7 +94,7 @@ import { JSONPath } from 'jsonpath-plus';
   if (needsInitialization) {
     console.log('initializing smart contract');
     await makeAndSendTransaction({
-      feePayerPrivateKey: deployerPrivateKey,
+      feePayerPrivateKey: feePayerPrivateKey,
       zkAppPublicKey: zkAppPublicKey,
       mutateZkApp: () => zkapp.init(),
       transactionFee: transactionFee,
@@ -92,7 +105,7 @@ import { JSONPath } from 'jsonpath-plus';
 
   let counter = await zkapp.counter.get();
   console.log(
-    'AcurastPriceOracle: current value of counter is',
+    'AcurastPriceOracle: (1) current value of counter is',
     counter.toString()
   );
 
@@ -123,22 +136,25 @@ import { JSONPath } from 'jsonpath-plus';
 
       const signatureFeed = Signature.create(zkAppPrivateKey, [
         nextCounter,
-        priceData,
+        priceDataBTC,
+        priceDataETH,
+        priceDataMINA,
       ]);
 
       console.log('Signature created');
 
       await makeAndSendTransaction({
-        feePayerPrivateKey: deployerPrivateKey,
+        feePayerPrivateKey: feePayerPrivateKey,
         zkAppPublicKey: zkAppPublicKey,
-        mutateZkApp: () =>
+        mutateZkApp: () => {
           zkapp.update(
             nextCounter,
             priceDataBTC,
             priceDataETH,
             priceDataMINA,
             signatureFeed
-          ),
+          );
+        },
         transactionFee: transactionFee,
         getStates: () => [
           zkapp.priceDataBTC.get(),
@@ -157,7 +173,7 @@ import { JSONPath } from 'jsonpath-plus';
         await zkapp.priceDataMINA.get(),
       ];
       console.log(
-        'AcurastPriceOracle: current value of counter is',
+        'AcurastPriceOracle: (2) current value of counter is',
         counter.toString()
       );
       console.log(
@@ -174,7 +190,7 @@ import { JSONPath } from 'jsonpath-plus';
       );
     }
   } catch (e) {
-    console.log('ERROR' + (e as Error).message);
+    console.log('ERROR ' + (e as Error).message);
   }
 
   // ----------------------------------------------------

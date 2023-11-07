@@ -69,6 +69,14 @@ export const makeAndSendTransaction = async <State extends ToString>({
     }
   );
 
+  // TODO: New code
+  // let transaction = await Mina.transaction(
+  //   { sender: feePayerPrivateKey.toPublicKey(), fee: transactionFee },
+  //   () => {
+  //     mutateZkApp();
+  //   }
+  // );
+
   // fill in the proof - this can take a while...
   console.log('Creating an execution proof...');
   const time0 = Date.now();
@@ -116,7 +124,7 @@ export const zkAppNeedsInitialization = async ({
   console.warn(
     'warning: using a `utils.ts` written before `isProved` made available. Check https://docs.minaprotocol.com/zkapps/tutorials/deploying-to-a-live-network for updates'
   );
-  console.log('ACCOUNT', JSON.stringify(zkAppAccount, null, 2));
+
   // TODO when available in the future, use isProved.
   const allZeros = zkAppAccount.zkapp!.appState!.every((f: Field) =>
     f.equals(Field.from(0)).toBoolean()

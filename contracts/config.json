@@ -8,14 +8,6 @@
       "feepayerAlias": "test",
       "fee": "0.1",
       "smartContract": "AcurastPriceOracle"
-    },
-    "testnet2": {
-      "url": "https://proxy.berkeley.minaexplorer.com/graphql",
-      "keyPath": "keys/testnet2.json",
-      "feepayerKeyPath": "/Users/main/.cache/zkapp-cli/keys/test2.json",
-      "feepayerAlias": "test2",
-      "fee": "0.1",
-      "smartContract": "AcurastPriceOracle"
     }
   }
 }
