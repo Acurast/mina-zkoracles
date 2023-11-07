@@ -216,6 +216,7 @@
             <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
               <label
                 class="relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none"
+                (click)="setSelectedOffchainWorkerType('local')"
                 ><input
                   type="radio"
                   name="network-type"
@@ -251,6 +252,7 @@
                 ></span></label
               ><label
                 class="relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none"
+                (click)="setSelectedOffchainWorkerType('acurast')"
                 ><input
                   type="radio"
                   name="network-type"
@@ -286,76 +288,81 @@
                 ></span
               ></label>
             </div>
-            <h5 class="text-md font-semibold leading-6 pt-8 pb-3">
-              Specify Parameters
-            </h5>
-            <div class="grid grid-cols-6 gap-6 pb-3">
-              <div class="col-span-3">
-                <label class="block text-sm font-medium leading-6 text-gray-900"
-                  >Trusted Oracle Source</label
-                >
-                <div class="w-full inline-flex">
-                  <div class="w-full relative mt-2 rounded-md shadow-sm">
-                    <input
-                      placeholder="Public Key"
-                      class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
+            <h3 *ngIf="selectedOffchainWorkerType === 'acurast'">Not Available yet</h3>
+              <h5 class="text-md font-semibold leading-6 pt-8 pb-3">
+                Specify Parameters
+              </h5>
+              <div class="grid grid-cols-6 gap-6 pb-3">
+                <div class="col-span-3">
+                  <label class="block text-sm font-medium leading-6 text-gray-900"
+                    >Trusted Oracle Source</label
+                  >
+                  <div class="w-full inline-flex">
+                    <div class="w-full relative mt-2 rounded-md shadow-sm">
+                      <input
+                        placeholder="Public Key"
+                        class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        [disabled]="selectedOffchainWorkerType === 'acurast'"
+                      />
+                    </div>
                   </div>
+                  <!--
+                                <div *ngIf="hasError('required')" class="text-red-600 text-sm mt-1">{{ name }} is required.</div>
+                                -->
+                  <span class="pt-3 block text-sm text-gray-500"
+                    >The public key of the trusted data provider.</span
+                  >
                 </div>
-                <!--
-                              <div *ngIf="hasError('required')" class="text-red-600 text-sm mt-1">{{ name }} is required.</div>
-                              -->
-                <span class="pt-3 block text-sm text-gray-500"
-                  >The public key of the trusted data provider.</span
-                >
               </div>
-            </div>
-            <div class="grid grid-cols-6 gap-6 pb-3">
-              <div class="col-span-3">
-                <label class="block text-sm font-medium leading-6 text-gray-900"
-                  >API</label
-                >
-                <div class="w-full inline-flex">
-                  <div class="w-full relative mt-2 rounded-md shadow-sm">
-                    <input
-                      placeholder="https://min-api.cryptocompare.com/data/pricemultifull?fsyms=MINA&tsyms=USD"
-                      class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
+              <div class="grid grid-cols-6 gap-6 pb-3">
+                <div class="col-span-3">
+                  <label class="block text-sm font-medium leading-6 text-gray-900"
+                    >API</label
+                  >
+                  <div class="w-full inline-flex">
+                    <div class="w-full relative mt-2 rounded-md shadow-sm">
+                      <input
+                        placeholder="https://min-api.cryptocompare.com/data/pricemultifull?fsyms=MINA&tsyms=USD"
+                        class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        [disabled]="selectedOffchainWorkerType === 'acurast'"
+                      />
+                    </div>
                   </div>
+                  <!--
+                                <div *ngIf="hasError('required')" class="text-red-600 text-sm mt-1">{{ name }} is required.</div>
+                                -->
+                  <span class="pt-3 block text-sm text-gray-500"
+                    >The API to fetch the price data.</span
+                  >
                 </div>
-                <!--
-                              <div *ngIf="hasError('required')" class="text-red-600 text-sm mt-1">{{ name }} is required.</div>
-                              -->
-                <span class="pt-3 block text-sm text-gray-500"
-                  >The API to fetch the price data.</span
-                >
               </div>
-            </div>
-
-            <div class="grid grid-cols-6 gap-6">
-              <div class="col-span-2">
-                <label class="block text-sm font-medium leading-6 text-gray-900"
-                  >Interval</label
-                >
-                <div class="w-full inline-flex">
-                  <div class="w-full relative mt-2 rounded-md shadow-sm">
-                    <input
-                      placeholder="5"
-                      class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
+  
+              <div class="grid grid-cols-6 gap-6">
+                <div class="col-span-2">
+                  <label class="block text-sm font-medium leading-6 text-gray-900"
+                    >Interval</label
+                  >
+                  <div class="w-full inline-flex">
+                    <div class="w-full relative mt-2 rounded-md shadow-sm">
+                      <input
+                        placeholder="5"
+                        class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        [disabled]="selectedOffchainWorkerType === 'acurast'"
+                      />
+                    </div>
                   </div>
+                  <!--
+                                <div *ngIf="hasError('required')" class="text-red-600 text-sm mt-1">{{ name }} is required.</div>
+                                -->
+                  <span class="pt-3 block text-sm text-gray-500"
+                    >The interval for updating in minutes.</span
+                  >
                 </div>
-                <!--
-                              <div *ngIf="hasError('required')" class="text-red-600 text-sm mt-1">{{ name }} is required.</div>
-                              -->
-                <span class="pt-3 block text-sm text-gray-500"
-                  >The interval for updating in minutes.</span
-                >
               </div>
-            </div>
             <div class="pt-5">
               <button
                 class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-gray-400"
+                [disabled]="selectedOffchainWorkerType !== 'local'"
               >
                 Create zkOracle Feed
               </button>
