@@ -43,3 +43,7 @@ Giving zkApp developers the ability to leverage sub-second communication times f
 ### Acurast Architecture
 
 More details on the [Acurast architecture](https://docs.acurast.com/acurast-protocol/architecture/architecture) and how [Acurast’s off-chain execution layer](https://docs.acurast.com/acurast-protocol/architecture/end-to-end) is structured can be found in the [Acurast Docs](https://docs.acurast.com).
+
+## Credits
+
+- [zkOracle-OCW](https://github.com/ubinix-warun/zkOracle-OCW/tree/main) - provided a great reference implementation on zkOracles and off-chain workers
