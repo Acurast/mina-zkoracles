@@ -1,4 +1,5 @@
 import { Field, Mina, PrivateKey, PublicKey, fetchAccount } from 'o1js';
+import { JSONPath } from 'jsonpath-plus';
 
 export const accountExists = async (account: PublicKey) => {
   let response = await fetchAccount({ publicKey: account });
@@ -134,3 +135,22 @@ export const zkAppNeedsInitialization = async ({
 };
 
 // ========================================================
+
+export const getPrice = async (symbol: string) => {
+  const priceUrl = `https://min-api.cryptocompare.com/data/price?fsym=${symbol}&tsyms=USD`;
+  const pricePath = `USD`; // 'RAW.MINA.USD.PRICE';
+
+  const response = await fetch(priceUrl);
+  const data = await response.json();
+  const result = JSONPath({ path: pricePath, json: data });
+  const r1000 = Math.floor((result[0] * 1000) as number);
+  const priceData = Field(r1000);
+
+  console.log(`request ${priceUrl}
+        - offchain-value '${pricePath}' = ${r1000 / 1000}
+        - onchain-value '${pricePath}' = ${
+    Number(priceData.toBigInt()) / 1000
+  }`);
+
+  return priceData;
+};

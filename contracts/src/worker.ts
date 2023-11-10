@@ -10,14 +10,13 @@ import {
 } from 'o1js';
 
 import {
+  getPrice,
   loopUntilAccountExists,
   makeAndSendTransaction,
   zkAppNeedsInitialization,
   // accountExists
 } from './utils.js';
 import fs from 'fs';
-
-import { JSONPath } from 'jsonpath-plus';
 
 (async function main() {
   await isReady;
@@ -114,25 +113,11 @@ import { JSONPath } from 'jsonpath-plus';
       // ----------------------------------------------------
       // Request Price and Feed data to on-chain
 
-      const priceUrl =
-        'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=MINA&tsyms=USD';
-      const pricePath = 'RAW.MINA.USD.PRICE';
+      const priceDataBTC = await getPrice('BTC');
+      const priceDataETH = await getPrice('ETH');
+      const priceDataMINA = await getPrice('MINA');
 
       const nextCounter = counter.add(1);
-
-      const response = await fetch(priceUrl);
-      const data = await response.json();
-      const result = JSONPath({ path: pricePath, json: data });
-      const r1000 = Math.floor((result[0] * 1000) as number);
-      const priceData = Field(r1000);
-
-      const priceDataBTC = priceData; // TODO
-      const priceDataETH = priceData; // TODO
-      const priceDataMINA = priceData; // TODO
-
-      console.log(`request ${priceUrl}
-      - offchain-value '${pricePath}' = ${r1000 / 1000}
-      - onchain-value '${pricePath}' = ${Number(priceData.toBigInt()) / 1000}`);
 
       const signatureFeed = Signature.create(zkAppPrivateKey, [
         nextCounter,
