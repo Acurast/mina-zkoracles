@@ -1,0 +1,65 @@
+name: Build and Deploy
+
+on: push
+
+jobs:
+  build_angular:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Node 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: Prepare
+        run: cd frontend && npm ci
+
+      # - name: Prettier
+      #   run: cd frontend && npm run actions:prettier
+
+      - name: Build
+        run: cd frontend && npm run build
+
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: angular_dist
+          path: frontend/dist
+
+  deploy_github_pages:
+    needs: build_angular
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Node 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: Prepare
+        run: cd frontend && npm ci
+
+      - name: Deploy Github Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: cd frontend && npm run actions:deploy
