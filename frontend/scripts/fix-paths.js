@@ -25,7 +25,7 @@ const replaceInFile = (filePath, searchString, replaceString) => {
 replaceInFile(
   "node_modules/o1js/dist/node/bindings/crypto/bindings/curve.d.ts",
   "import { MlPair } from 'src/lib/ml/base.js';",
-  "import { MlPair } from '../../lib/ml/base.js';"
+  "import { MlPair } from '../../../lib/ml/base.js';"
 );
 replaceInFile(
   "node_modules/o1js/dist/node/bindings/crypto/bindings/kimchi-types.d.ts",
