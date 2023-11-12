@@ -34,13 +34,13 @@ replaceInFile(
 );
 replaceInFile(
   "node_modules/o1js/dist/node/bindings/js/node/node-backend.d.ts",
-  'export const wasm: typeof import("../../compiled/node_bindings/plonk_wasm.cjs");',
-  'export const wasm: typeof import("../../compiled/_node_bindings/plonk_wasm.cjs");'
+  "../../compiled/node_bindings/plonk_wasm.cjs",
+  "../../compiled/_node_bindings/plonk_wasm.cjs"
 );
 replaceInFile(
   "node_modules/o1js/dist/node/bindings/js/wrapper.d.ts",
-  'export function getWasm(): typeof import("../compiled/node_bindings/plonk_wasm.cjs");',
-  'export function getWasm(): typeof import("../compiled/_node_bindings/plonk_wasm.cjs");'
+  "../compiled/node_bindings/plonk_wasm.cjs",
+  "../compiled/_node_bindings/plonk_wasm.cjs"
 );
 replaceInFile(
   "node_modules/o1js/dist/node/lib/proof-system/prover-keys.d.ts",
