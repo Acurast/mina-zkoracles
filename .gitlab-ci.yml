@@ -17,6 +17,7 @@ build:
   script:
     - mkdir ./contracts/keys
     - cp $DEPLOYER_PRIVATE_KEY ./contracts/keys/deployer.json
+    - cp $FEE_PAYER_PRIVATE_KEY ./contracts/keys/feepayer.json
     - !reference [.build, script]
 
 publish-dev:

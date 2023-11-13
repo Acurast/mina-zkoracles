@@ -32,7 +32,10 @@ import fs from 'fs';
 
   let transactionFee = 100_000_000;
 
-  const deployerKeysFileContents = fs.readFileSync('keys/testnet.json', 'utf8');
+  const deployerKeysFileContents = fs.readFileSync(
+    'keys/deployer.json',
+    'utf8'
+  );
 
   let key = JSON.parse(deployerKeysFileContents);
 
@@ -43,7 +46,7 @@ import fs from 'fs';
   // DEPLOYER KEY
 
   const feePayerPrivateKeyFileContents = fs.readFileSync(
-    'keys/deployer.json',
+    'keys/feepayer.json',
     'utf8'
   );
 
