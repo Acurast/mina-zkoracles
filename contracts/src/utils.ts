@@ -57,8 +57,6 @@ export const makeAndSendTransaction = async <State extends ToString>({
   getStates: () => State;
   statesEqual: (state1: State, state2: State) => boolean;
 }) => {
-  const initialStates = getStates();
-
   // Why this line? It increments internal feePayer account variables, such as
   // nonce, necessary for successfully sending a transaction
   await fetchAccount({ publicKey: feePayerPrivateKey.toPublicKey() });
@@ -96,23 +94,6 @@ export const makeAndSendTransaction = async <State extends ToString>({
       'https://berkeley.minaexplorer.com/transaction/' + hash
     );
   }
-
-  let states = getStates();
-
-  console.log(
-    'waiting for zkApp state to change... (current state: ',
-    states.toString() + ')'
-  );
-
-  let stateChanged = false;
-  while (!stateChanged) {
-    process.stdout.write('.');
-    await new Promise((resolve) => setTimeout(resolve, 5000));
-    await fetchAccount({ publicKey: zkAppPublicKey });
-    states = await getStates();
-    stateChanged = !statesEqual(initialStates, states);
-  }
-  process.stdout.write('\r\n');
 };
 
 // ========================================================

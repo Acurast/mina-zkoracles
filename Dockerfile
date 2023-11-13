@@ -8,4 +8,4 @@ RUN npm install
 COPY ./contracts ./
 RUN npm run build
 
-CMD ["node", "build/src/run.js"]
+CMD ["node", "build/src/worker.js"]

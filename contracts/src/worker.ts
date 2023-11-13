@@ -109,71 +109,69 @@ import fs from 'fs';
   );
 
   try {
-    for (;;) {
-      // ----------------------------------------------------
-      // Request Price and Feed data to on-chain
+    // ----------------------------------------------------
+    // Request Price and Feed data to on-chain
 
-      const priceDataBTC = await getPrice('BTC');
-      const priceDataETH = await getPrice('ETH');
-      const priceDataMINA = await getPrice('MINA');
+    const priceDataBTC = await getPrice('BTC');
+    const priceDataETH = await getPrice('ETH');
+    const priceDataMINA = await getPrice('MINA');
 
-      const nextCounter = counter.add(1);
+    const nextCounter = counter.add(1);
 
-      const signatureFeed = Signature.create(zkAppPrivateKey, [
-        nextCounter,
-        priceDataBTC,
-        priceDataETH,
-        priceDataMINA,
-      ]);
+    const signatureFeed = Signature.create(zkAppPrivateKey, [
+      nextCounter,
+      priceDataBTC,
+      priceDataETH,
+      priceDataMINA,
+    ]);
 
-      console.log('Signature created');
+    console.log('Signature created');
 
-      await makeAndSendTransaction({
-        feePayerPrivateKey: feePayerPrivateKey,
-        zkAppPublicKey: zkAppPublicKey,
-        mutateZkApp: () => {
-          zkapp.update(
-            nextCounter,
-            priceDataBTC,
-            priceDataETH,
-            priceDataMINA,
-            signatureFeed
-          );
-        },
-        transactionFee: transactionFee,
-        getStates: () => [
-          zkapp.priceDataBTC.get(),
-          zkapp.priceDataETH.get(),
-          zkapp.priceDataMINA.get(),
-        ],
-        statesEqual: (arr1, arr2) =>
-          arr1.every((el, index) => el.equals(arr2[index])),
-      });
+    await makeAndSendTransaction({
+      feePayerPrivateKey: feePayerPrivateKey,
+      zkAppPublicKey: zkAppPublicKey,
+      mutateZkApp: () => {
+        zkapp.update(
+          nextCounter,
+          priceDataBTC,
+          priceDataETH,
+          priceDataMINA,
+          signatureFeed
+        );
+      },
+      transactionFee: transactionFee,
+      getStates: () => [
+        zkapp.priceDataBTC.get(),
+        zkapp.priceDataETH.get(),
+        zkapp.priceDataMINA.get(),
+      ],
+      statesEqual: (arr1, arr2) =>
+        arr1.every((el, index) => el.equals(arr2[index])),
+    });
 
-      console.log('Transaction created');
+    console.log('Transaction created');
 
-      let onChainData = [
-        await zkapp.priceDataBTC.get(),
-        await zkapp.priceDataETH.get(),
-        await zkapp.priceDataMINA.get(),
-      ];
-      console.log(
-        'AcurastPriceOracle: (2) current value of counter is',
-        counter.toString()
-      );
-      console.log(
-        'AcurastPriceOracle: current value of BTC/USD is',
-        Number(onChainData[0].toBigInt()) / 1000
-      );
-      console.log(
-        'AcurastPriceOracle: current value of ETH/USD is',
-        Number(onChainData[1].toBigInt()) / 1000
-      );
-      console.log(
-        'AcurastPriceOracle: current value of MINA/USD is',
-        Number(onChainData[2].toBigInt()) / 1000
-      );
-    }
+    let onChainData = [
+      await zkapp.priceDataBTC.get(),
+      await zkapp.priceDataETH.get(),
+      await zkapp.priceDataMINA.get(),
+    ];
+    console.log(
+      'AcurastPriceOracle: (2) current value of counter is',
+      counter.toString()
+    );
+    console.log(
+      'AcurastPriceOracle: current value of BTC/USD is',
+      Number(onChainData[0].toBigInt()) / 1000
+    );
+    console.log(
+      'AcurastPriceOracle: current value of ETH/USD is',
+      Number(onChainData[1].toBigInt()) / 1000
+    );
+    console.log(
+      'AcurastPriceOracle: current value of MINA/USD is',
+      Number(onChainData[2].toBigInt()) / 1000
+    );
   } catch (e) {
     console.log('ERROR ' + (e as Error).message);
   }
