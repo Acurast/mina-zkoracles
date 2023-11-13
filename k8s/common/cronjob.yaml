@@ -16,12 +16,4 @@ spec:
             - name: update-oracle
               image: __TO_BE_REPLACED_BY_IMAGE_TAG__
               imagePullPolicy: IfNotPresent
-              command: ["/bin/bash", "-c"]
-              args:
-                - cd contracts && npm run build && node build/src/worker.js
-              envFrom:
-                - configMapRef:
-                    name: __NAMESPACE_NAME__-config-map
-                - secretRef:
-                    name: __NAMESPACE_NAME__-secret
           restartPolicy: Never
