@@ -15,6 +15,7 @@ build:
   stage: build
   extends: .build
   script:
+    - mkdir ./contracts/keys
     - cp $DEPLOYER_PRIVATE_KEY ./contracts/keys/deployer.json
     - !reference [.build, script]
 
