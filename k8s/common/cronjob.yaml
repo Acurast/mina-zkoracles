@@ -8,7 +8,7 @@ spec:
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
-      activeDeadlineSeconds: 240
+      activeDeadlineSeconds: 900
       parallelism: 1
       template:
         spec:
@@ -16,11 +16,11 @@ spec:
             - name: update-oracle
               image: __TO_BE_REPLACED_BY_IMAGE_TAG__
               imagePullPolicy: IfNotPresent
-              resources:
-                requests:
-                  memory: "2048Mi"
-                  cpu: "1000m"
-                limits:
-                  memory: "2048Mi"
-                  cpu: "1500m"
+              # resources:
+              #   requests:
+              #     memory: "2048Mi"
+              #     cpu: "1000m"
+              #   limits:
+              #     memory: "2048Mi"
+              #     cpu: "1500m"
           restartPolicy: Never
