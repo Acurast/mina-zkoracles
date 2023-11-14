@@ -4,6 +4,16 @@ metadata:
   name: update-oracle
   namespace: __NAMESPACE_NAME__
 spec:
+  containers:
+    - name: app
+      image: images.my-company.example/app:v4
+      resources:
+        requests:
+          memory: "1024Mi"
+          cpu: "250m"
+        limits:
+          memory: "1024Mi"
+          cpu: "500m"
   schedule: "*/15 * * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
