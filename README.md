@@ -44,6 +44,12 @@ Giving zkApp developers the ability to leverage sub-second communication times f
 
 More details on the [Acurast architecture](https://docs.acurast.com/acurast-protocol/architecture/architecture) and how [Acurast’s off-chain execution layer](https://docs.acurast.com/acurast-protocol/architecture/end-to-end) is structured can be found in the [Acurast Docs](https://docs.acurast.com).
 
+## Deployment
+
+The frontend is deployed on GitHub Pages through GitHub actions.
+
+The worker to update the oracles is deployed on Google Cloud and is scheduled to run every 15 minutes via cronjob.
+
 ## Credits
 
 - [zkOracle-OCW](https://github.com/ubinix-warun/zkOracle-OCW/tree/main) - provided a great reference implementation on zkOracles and off-chain workers
