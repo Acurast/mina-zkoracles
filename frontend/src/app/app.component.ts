@@ -3,6 +3,13 @@ import { OracleService } from './oracle.service';
 
 type OffchainWorkerType = 'local' | 'acurast';
 
+function roundToNearest15(date = new Date()) {
+  const minutes = 15;
+  const ms = 1000 * 60 * minutes;
+
+  return new Date(Math.floor(date.getTime() / ms) * ms);
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,6 +21,8 @@ export class AppComponent {
   btcPrice: string = '0';
   ethPrice: string = '0';
   minaPrice: string = '0';
+
+  lastUpdate: number = roundToNearest15().getTime();
 
   public selectedOffchainWorkerType: OffchainWorkerType = 'local';
 
