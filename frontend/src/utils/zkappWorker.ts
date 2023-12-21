@@ -24,7 +24,7 @@ const functions = {
   },
   loadContract: async (args: {}) => {
     const { AcurastPriceOracle } = await import(
-      "../../../contracts/build/src/index"
+      "../../../contracts/src/index"
     );
     state.AcurastPriceOracle = AcurastPriceOracle;
   },
