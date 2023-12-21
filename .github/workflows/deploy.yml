@@ -16,25 +16,23 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+
       - name: Node 18
         uses: actions/setup-node@v1
         with:
           node-version: 18.x
 
-      - name: Prepare
+      - name: Install Dependencies
         run: cd frontend && npm ci
 
-      # - name: Prettier
-      #   run: cd frontend && npm run actions:prettier
-
       - name: Build
-        run: cd frontend && npm run build
+        run: npm run build
 
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
-          name: angular_dist
-          path: frontend/dist
+          name: next_dist
+          path: frontend/.next
 
   deploy_github_pages:
     needs: build_next
@@ -51,15 +49,16 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+
       - name: Node 18
         uses: actions/setup-node@v1
         with:
           node-version: 18.x
 
-      - name: Prepare
-        run: cd frontend && npm ci
+      - name: Install Dependencies
+        run:cd frontend && npm ci
 
-      - name: Deploy Github Pages
+      - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: cd frontend && npm run actions:deploy
+        run:cd frontend && npm run deploy
