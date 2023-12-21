@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2 
+      - uses: actions/checkout@v2
 
       - name: Cache node modules
         uses: actions/cache@v1
@@ -16,14 +16,14 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-
+      
       - name: Node 18
         uses: actions/setup-node@v1
         with:
           node-version: 18.x
 
       - name: Install Dependencies
-        run: cd frontend && npm ci
+        run: npm ci
 
       - name: Build
         run: npm run build
@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: next_dist
-          path: frontend/.next
+          path: .next
 
   deploy_github_pages:
     needs: build_next
@@ -56,9 +56,9 @@ jobs:
           node-version: 18.x
 
       - name: Install Dependencies
-        run:cd frontend && npm ci
+        run: npm ci
 
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run:cd frontend && npm run deploy
+        run: npm run deploy
