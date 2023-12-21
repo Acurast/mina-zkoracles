@@ -3,7 +3,7 @@ name: Build and Deploy
 on: push
 
 jobs:
-  build_angular:
+  build_next:
     runs-on: ubuntu-latest
 
     steps:
@@ -37,7 +37,7 @@ jobs:
           path: frontend/dist
 
   deploy_github_pages:
-    needs: build_angular
+    needs: build_next
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
