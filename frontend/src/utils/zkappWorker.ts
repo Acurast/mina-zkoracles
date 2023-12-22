@@ -4,7 +4,7 @@ type Transaction = Awaited<ReturnType<typeof Mina.transaction>>;
 
 // ---------------------------------------------------------------------------------------
 
-import type { AcurastPriceOracle } from "../../../contracts/src/index";
+import type { AcurastPriceOracle } from "../../../contracts/build/src/index";
 
 const state = {
   AcurastPriceOracle: null as null | typeof AcurastPriceOracle,
@@ -24,7 +24,7 @@ const functions = {
   },
   loadContract: async (args: {}) => {
     const { AcurastPriceOracle } = await import(
-      "../../../contracts/src/index"
+      "../../../contracts/build/src/index"
     );
     state.AcurastPriceOracle = AcurastPriceOracle;
   },

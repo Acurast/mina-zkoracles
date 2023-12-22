@@ -1,5 +1,5 @@
 import Spinner from "@/app/ui/spinner";
-import App from "./app.page";
+import App from "./_app.page";
 import { ZkappContext, ZkappContextProvider } from "@/app/store/ZkappContext";
 import { useContext } from "react";
 
