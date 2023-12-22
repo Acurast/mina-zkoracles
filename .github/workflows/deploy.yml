@@ -16,7 +16,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      
+
       - name: Node 18
         uses: actions/setup-node@v1
         with:
@@ -41,6 +41,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Setup git user
+        run: |
+          git config --global user.name $GITHUB_ACTOR
+          git config --global user.email $GITHUB_ACTOR@users.noreply.github.com
 
       - name: Cache node modules
         uses: actions/cache@v1
