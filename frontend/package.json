@@ -10,7 +10,7 @@
     "lint": "next lint",
     "ts-watch": "tsc --noEmit --incremental --watch",
     "export": "next export",
-    "deploy": "npm run build && touch out/.nojekyll && node ./ghp-postbuild && git add -f out && git commit -m \"Deploy gh-pages\" && cd .. && git subtree push --prefix ui/out origin gh-pages"
+    "deploy": "npm run build && touch out/.nojekyll && node ./ghp-postbuild && git add -f out && git commit -m \"Deploy gh-pages\" && cd .. && git --name $GITHUB_ACTOR --email $GITHUB_ACTOR@users.noreply.github.com --no-silent && git subtree push --prefix ui/out origin gh-pages"
   },
   "dependencies": {
     "@types/node": "20.10.1",
