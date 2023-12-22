@@ -23,7 +23,7 @@ jobs:
           node-version: 18.x
 
       - name: Install Dependencies
-        run: cd frontend && npm ci
+        run: cd contracts && npm install && cd .. && cd frontend && npm ci
 
       - name: Build
         run: cd contracts && npm run build && cd .. && cd frontend && npm run build
