@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: next_dist
-          path: .next
+          path: frontend/.next
 
   deploy_github_pages:
     needs: build_next
