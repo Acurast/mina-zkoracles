@@ -1,9 +1,10 @@
-# Mina zkApp: Acurast Mina zkOracle Frontend
+# Mina zkApp: Mina Zkoracles
+
+This template uses TypeScript.
 
 ## How to build
 
 ```sh
-npm i
 npm run build
 ```
 

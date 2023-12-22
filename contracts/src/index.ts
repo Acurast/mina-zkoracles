@@ -1,3 +1,3 @@
-import { Add } from './Add.js';
+import { AcurastPriceOracle } from './AcurastPriceOracle';
 
-export { Add };
+export { AcurastPriceOracle };
