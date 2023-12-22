@@ -2,8 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
-
-
+  output: 'export',
   webpack(config) {
     config.resolve.alias = {
       ...config.resolve.alias,

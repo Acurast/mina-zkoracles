@@ -1,11 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-import url from 'url';
+const fs = require('fs');
+const path = require('path');
 
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 // This script modifies the built CSS files and prepends the repo-name to the asset URLs.
-// to be compatible with github pages deployment.
+// to be compatible with GitHub Pages deployment.
 const cssDir = path.join(__dirname, '/out/_next/static/css');
 // Update your repository name here if it is different from the project name.
 let repoURL = "mina-zkoracles";

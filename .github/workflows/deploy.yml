@@ -23,10 +23,10 @@ jobs:
           node-version: 18.x
 
       - name: Install Dependencies
-        run: cd contracts && npm install && cd .. && cd frontend && npm ci
+        run: cd frontend && npm ci
 
       - name: Build
-        run: cd contracts && npm run build && cd .. && cd frontend && npm run build
+        run: cd frontend && npm run build
 
       - name: Upload
         uses: actions/upload-artifact@v1
