@@ -5,12 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build:contracts": "cd ../contracts && npm install && npm run build && cd ../frontend",
-    "build": "npm run build:contracts && next build",
+    "build": "npm run build:contracts && next build && touch out/.nojekyll && node ./ghp-postbuild",
     "start": "next start",
     "lint": "next lint",
     "ts-watch": "tsc --noEmit --incremental --watch",
     "export": "next export",
-    "deploy": "npm run build && touch out/.nojekyll && node ./ghp-postbuild && git add -f out && git commit -m \"Deploy gh-pages\" && cd .. && git subtree push --prefix frontend/out origin gh-pages"
+    "deploy": "npm run build && git add -f out && git commit -m \"Deploy gh-pages\" && cd .. && git subtree push --prefix frontend/out origin gh-pages"
   },
   "dependencies": {
     "@types/node": "20.10.1",
